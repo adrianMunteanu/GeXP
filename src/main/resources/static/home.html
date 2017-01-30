@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<title>Hello AngularJS</title>
+<!--<link
+	href="css/angular-bootstrap.css"
+	rel="stylesheet">-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="js/hello.js"></script>
+    <script src="js/configuration.js"></script>
+    <script src="js/sync.js"></script>
+	<script src="js/home.js"></script>
+	<link href="css/home.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="js/mapDirective.js"></script>
+
+    <!--</script><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0bsq7Dbedo6M_v4OifXWeBIs_kKrRbyE&callback=initMap"></script>-->
+    <script src="js/maps.js"></script>
+</head>
+
+<body ng-app="hello">
+	<div class="container" ng-controller="home as vm">
+		<div class="upperDiv">
+			<span class="logo"> Gexp
+			</span>
+			<span class="username"><i class="fa fa-user-circle" aria-hidden="true"></i>Username</span>
+		</div>
+		<div class="bottomDiv">
+			<div class="leftDiv">
+				<div class="dropdown customDropdown">
+    				<button class="btn btn-default dropdown-toggle dropdownButton" type="button" id="dropdownMenu1" 
+    				data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						{{vm.selectedStatistic}} <span class="caret"></span>
+					</button>
+
+				    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+				      <li ng-repeat="a in vm.statistics" ><a href="#" ng-click="vm.changeStatistic(a)">{{a}}</a>
+				      </li>
+				    </ul>
+				</div>
+				<div class="dropdown customDropdown" ng-if="vm.showDropdowns === true">
+    				<button class="btn btn-default dropdown-toggle dropdownButton" type="button" id="dropdownMenu1" 
+    				data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span>{{vm.selectedCountry}}</span> <span class="caret"></span>
+					</button>
+
+				    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+				      <li ng-repeat="a in vm.countries" ><a href="#" ng-click="vm.changeCountry(a)">{{a}}</a>
+				      </li>
+				    </ul>
+				</div>
+				<div class="dropdown customDropdown" ng-show="vm.showDropdowns === true">
+    				<button class="btn btn-default dropdown-toggle dropdownButton" type="button" id="dropdownMenu1" 
+    				data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						{{vm.selectedYear}} <span class="caret"></span>
+					</button>
+
+				    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+				      <li ng-repeat="a in vm.years" ><a href="#" ng-click="vm.changeYear(a)">{{a}}</a>
+				      </li>
+				    </ul>
+				</div>
+                <div class="customDropdown" ng-show="vm.showDropdowns === true">
+				    <button class="btn btn-default dropdownButton" type="button" aria-expanded="true" ng-click="vm.selectStatistic()"> Show Statistic <i class="fa fa-play" aria-hidden="true"></i></button>
+                 </div>
+			</div>
+			<div class="rightDiv" ng-if="vm.showMap == true">
+                <div my-map="" type-id={{vm.prop}}></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

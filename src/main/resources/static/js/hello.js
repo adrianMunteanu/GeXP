@@ -1,4 +1,3 @@
-	alert('saltare');
 angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProvider) {
 
 	$routeProvider.when('/', {
@@ -16,7 +15,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 }).controller('navigation',
 
 		function($rootScope, $http, $location, $route) {
-
+			
 			var self = this;
 
 			self.tab = function(route) {
