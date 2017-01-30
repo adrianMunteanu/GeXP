@@ -18,7 +18,6 @@ public class SparqlServiceBean implements SparqlService {
 	StatisticOntology owl = new StatisticOntology();
 	QueriesApi query = new QueriesApi();
 	boolean init;
-	List<String> categories;
 
 	{
 		String OwlFilePath = "C:\\Adrian\\statisticsOntologyeeeee.owl";
@@ -69,8 +68,8 @@ public class SparqlServiceBean implements SparqlService {
 
 	public List<String> getStatistics() {
 
-		if (init && categories == null) {
-			categories = new ArrayList<>();
+		if (init ) {
+			List<String>categories = new ArrayList<>();
 			ArrayList<String> mainCategories = query.getMainCategories();
 			for (String category : mainCategories) {
 				ArrayList<String> subcategories = query.getSubcategoriesOf(category);
