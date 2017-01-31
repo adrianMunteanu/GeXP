@@ -44,9 +44,4 @@ public class MainController {
 		user.setUsername("Adyzds");
 		return user;
 	}
-
-	@RequestMapping("/countries")
-	public List<String> getCountries() {
-		return sparqlService.getCountries();
-	}
 }

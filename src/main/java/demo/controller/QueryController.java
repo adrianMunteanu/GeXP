@@ -20,9 +20,8 @@ public class QueryController {
 	SparqlService sparqlService;
 
 	@RequestMapping("/statistics")
-	public List<String> getStatistics() {
+	public List<Statistic> getStatistics() {
 		return sparqlService.getStatistics();
-		// return null;
 	}
 
 	@RequestMapping("/dropDowns")
@@ -38,7 +37,7 @@ public class QueryController {
 	}
 
 	@RequestMapping("/wikiDataStatistics")
-	public List<String> getWikiDataStatistics() {
+	public List<Statistic> getWikiDataStatistics() {
 		return sparqlService.getWikiDataStatistics();
 	}
 

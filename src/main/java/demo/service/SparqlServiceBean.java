@@ -20,7 +20,6 @@ public class SparqlServiceBean implements SparqlService {
 	StatisticOntology owl = new StatisticOntology();
 	QueriesApi query = new QueriesApi();
 	boolean init;
-
 	{
 		String OwlFilePath = "C:\\Adrian\\statisticsOntologyeeeee.owl";
 		boolean created = owl.create();
@@ -35,49 +34,18 @@ public class SparqlServiceBean implements SparqlService {
 
 	}
 
-	public List<String> getCountries() {
+	public List<Statistic> getStatistics() {
 
 		if (init) {
-			// lista celor 3 mari categorii
-			ArrayList<String> categories = query.getMainCategories();
-			for (String category : categories) {
-				System.out.println(category);
-				// pentru fiecare categorie avem statisticile disponibile
-				ArrayList<String> subcategory = query.getSubcategoriesOf(category);
-				for (String statistic : subcategory) {
-					// fiecare statistica are rezultate numai pt anumiti ani si
-					// anumite tari
-					System.out.println("    " + statistic);
-					ArrayList<String> countries = query.getAvailableCountries(statistic);
-					for (String country : countries) {
-						System.out.print("        " + country + " / ");
-					}
-					System.out.println();
-					ArrayList<Integer> years = query.getAvailableYears(statistic);
-					for (int year : years) {
-						System.out.print("        " + year + " / ");
-					}
-					System.out.println();
-
-				}
-			}
-
-			ArrayList<String> subcategorii = query.getSubcategoriesOf("Living_standards");
-			return query.getAvailableCountries("Unemployed_rate");
-		}
-		return null;
-	}
-
-	public List<String> getStatistics() {
-
-		if (init) {
-			List<String> categories = new ArrayList<>();
+			List<Statistic> statistics = new ArrayList<>();
 			ArrayList<String> mainCategories = query.getMainCategories();
 			for (String category : mainCategories) {
 				ArrayList<String> subcategories = query.getSubcategoriesOf(category);
-				categories.addAll(subcategories);
+				for(String subCategory : subcategories){
+					statistics.add(query.getCategoryDetails(subCategory));
+				}
 			}
-			return categories;
+			return statistics;
 		}
 		return null;
 	}
@@ -104,8 +72,13 @@ public class SparqlServiceBean implements SparqlService {
 	}
 
 	@Override
-	public List<String> getWikiDataStatistics() {
-		return query.getWikidataCategories();
+	public List<Statistic> getWikiDataStatistics() {
+		ArrayList<Statistic> statistics = new ArrayList<>();
+		ArrayList<String> wikidataCategories = query.getWikidataCategories();
+		for(String category : wikidataCategories){
+			statistics.add(query.getWikidataCategoryDetail(category));
+		}
+		return statistics;
 	}
 
 	@Override
@@ -178,6 +151,8 @@ public class SparqlServiceBean implements SparqlService {
 			categoryDetails = query.getWikidataCategoryDetail(statistic);
 		}
 		return categoryDetails;
+		
+//		StatisticOntology.addData(filePath, yearData, countryData, maleData, femaleData, stat_identifier, stat_type);
 	}
 	
 	

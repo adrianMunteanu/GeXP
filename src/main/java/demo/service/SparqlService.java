@@ -10,15 +10,13 @@ import queries.WikidataParameter;
 
 public interface SparqlService {
 
-	public List<String> getCountries();
-
-	public List<String> getStatistics();
+	public List<Statistic> getStatistics();
 
 	public DropDown getDropDownValues(String statistic);
 
 	public List<StatisticResult> getStatistic(String statistic, Integer year, String country);
 
-	public List<String> getWikiDataStatistics();
+	public List<Statistic> getWikiDataStatistics();
 
 	public List<WikidataParameter> getWikidataCountries();
 
