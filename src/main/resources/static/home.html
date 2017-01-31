@@ -18,8 +18,22 @@
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="js/mapDirective.js"></script>
 
-    <!--</script><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0bsq7Dbedo6M_v4OifXWeBIs_kKrRbyE&callback=initMap"></script>-->
-    <script src="js/maps.js"></script>
+<!-- 	<script type="text/javascript">
+	function initMap() {
+		var map;
+		 var mapOptions = {
+		            center: new google.maps.LatLng(50, 2),
+		            zoom: 4,
+		            mapTypeId: google.maps.MapTypeId.ROADMAP,
+		            scrollwheel: false
+		        };
+		
+        if (map === void 0) {
+            map = new google.maps.Map(document.getElementById('gmaps'), mapOptions);
+        }
+    } </script> -->
+    <!-- </script><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0bsq7Dbedo6M_v4OifXWeBIs_kKrRbyE&callback=initMap"></script> -->
+<script src="js/maps.js"></script>
 </head>
 
 <body ng-app="hello">
@@ -34,11 +48,11 @@
 				<div class="dropdown customDropdown">
     				<button class="btn btn-default dropdown-toggle dropdownButton" type="button" id="dropdownMenu1" 
     				data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						{{vm.selectedStatistic}} <span class="caret"></span>
+						{{vm.selectedStatistic.identifier}} <span class="caret"></span>
 					</button>
 
-				    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-				      <li ng-repeat="a in vm.statistics" ><a href="#" ng-click="vm.changeStatistic(a)">{{a}}</a>
+				    <ul class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="dropdownMenu1">
+				      <li ng-repeat="a in vm.statistics" ><a href="#" ng-click="vm.changeStatistic(a)">{{a.identifier}}</a>
 				      </li>
 				    </ul>
 				</div>
@@ -48,7 +62,7 @@
 						<span>{{vm.selectedCountry}}</span> <span class="caret"></span>
 					</button>
 
-				    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+				    <ul class="dropdown-menu dropdown-menu-right scrollable-menu " aria-labelledby="dropdownMenu1">
 				      <li ng-repeat="a in vm.countries" ><a href="#" ng-click="vm.changeCountry(a)">{{a}}</a>
 				      </li>
 				    </ul>
@@ -59,7 +73,7 @@
 						{{vm.selectedYear}} <span class="caret"></span>
 					</button>
 
-				    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+				    <ul class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="dropdownMenu1">
 				      <li ng-repeat="a in vm.years" ><a href="#" ng-click="vm.changeYear(a)">{{a}}</a>
 				      </li>
 				    </ul>

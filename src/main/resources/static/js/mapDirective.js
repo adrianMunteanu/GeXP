@@ -14,7 +14,7 @@ app.directive('myMap', function() {
             scrollwheel: false
         };
         
-        // init the map
+         //init the map
         function initMap() {
             if (map === void 0) {
                 map = new google.maps.Map(element[0], mapOptions);
@@ -84,23 +84,32 @@ app.directive('myMap', function() {
         // show the map and place some markers
         initMap();
         
+        setTimeout(function() {
+            var a = 1;
+        }, 5000);
         var countries = localStorage.getItem('countries');
+        console.log(countries);
         var menStat = localStorage.getItem('men');
         var femaleStat = localStorage.getItem('female');
-        //var countriesArray = countries.split(',');
-        for(var i=0; i<countries.length; i++){
-            getCountry(countries[i], "Number of men: " + menStat[i] + ", number of female: " + femaleStat[i]);
+        var countriesArray = countries.split(',');
+        var menArray = menStat.split(',');
+        var femaleArray = femaleStat.split(',');
+        for(var i=0; i<countriesArray.length; i++){
+            getCountry(countriesArray[i], "Number of men: " + menArray[i] + ", number of female: " + femaleArray[i]);
         }
         console.log("markers set");
         
-        scope.$watch("typeId",function(newValue,oldValue) {
-            var countries = localStorage.getItem('countries');
-            var menStat = localStorage.getItem('men');
-            var femaleStat = localStorage.getItem('female');
-            //var countriesArray = countries.split(',');
-            for(var i=0; i<countries.length; i++){
-               getCountry(countries[i], "Number of men: " + menStat[i] + ", number of female: " + femaleStat[i]);
-            };
+        scope.$watch("typeId",function(newValue,oldValue) {console.log("plm");
+        	 google.maps.event.trigger(map, 'resize');
+        	 var countries = localStorage.getItem('countries');
+             console.log(countries);
+             var menStat = localStorage.getItem('men');
+             var femaleStat = localStorage.getItem('female');
+             var countriesArray = countries.split(',');
+             for(var i=0; i<countriesArray.length; i++){
+                 getCountry(countriesArray[i], "Number of men: " + menStat[i] + ", number of female: " + femaleStat[i]);
+             }
+            
         });
     };
     

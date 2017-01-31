@@ -30,7 +30,7 @@ public class QueryController {
 	}
 
 	@RequestMapping("/statistic")
-	public List<StatisticResult> getStatistic(@RequestParam(value = "statistic") String statistic,
+	public List<StatisticResult> getStatistic(@RequestParam(value = "statistic_name") String statistic,
 			@RequestParam(value = "year") Integer year,
 			@RequestParam(value = "country", required = false) String country) {
 		return sparqlService.getStatistic(statistic, year, country);

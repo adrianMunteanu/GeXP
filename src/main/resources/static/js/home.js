@@ -6,8 +6,9 @@ app.controller('home', ['$scope', '$http', '$window', '$rootScope', "Sync", func
     var self = this;
     
     this.showDropdowns = false;
-    self.selectedCountry = "Select Country";
-    self.selectedStatistic = "Select Statistic";
+    self.selectedCountry= "Select Country";
+    self.selectedStatistic={};
+    self.selectedStatistic.identifier = "Select Statistic";
     self.selectedYear = "Select Year";
     self.singleMaleResults = null;
     self.singleFemaleResult = null;
@@ -24,7 +25,7 @@ app.controller('home', ['$scope', '$http', '$window', '$rootScope', "Sync", func
     };
     
     this.populateDropdowns = function(){
-        Sync.populateDropdowns(self.selectedStatistic, function(data){
+        Sync.populateDropdowns(self.selectedStatistic.identifier, function(data){
             self.years = data.years;
             self.countries = data.countries;
             console.log(data);
@@ -32,17 +33,19 @@ app.controller('home', ['$scope', '$http', '$window', '$rootScope', "Sync", func
     };
 	
     this.selectStatistic = function(){
-    	console.log(self.selectedCountry);
-        if(self.selectedCountry){
-            Sync.getStatistic(self.selectStatistic, self.selectedYear, self.selectedCountry, function(data){
+    	console.log(self.selectedStatistic);
+        if(self.selectedCountry != "Select Country"){
+            Sync.getStatistic(self.selectedStatistic.identifier, self.selectedYear, self.selectedCountry, function(data){
             	console.log(data);
-                localStorage.setItem("countries", self.selectedCountry);
-                self.singleMaleResults = data[0].male_result;
-                self.singleFemaleResult = data[0].female_results;
+                localStorage.setItem("countries", data[0].country);
+                localStorage.setItem("men", data[0].male_result);
+                localStorage.setItem("female", data[0].female_result);
+                self.showMap = true;
+                self.prop++;
             });
         }
         else{
-            Sync.getStatisticWithOnlyYear(self.selectStatistic, self.selectedYear, function(data){
+            Sync.getStatisticWithOnlyYear(self.selectedStatistic.identifier, self.selectedYear, function(data){
             	console.log(data);
                 self.stat = data;
                 var actualCountries = [];
@@ -54,19 +57,20 @@ app.controller('home', ['$scope', '$http', '$window', '$rootScope', "Sync", func
                     menStat.push(data[i].male_result);
                     femaleStat.push(data[i].female_result);
                 }
-                 localStorage.setItem("countries", self.countries);
-                 localStorage.setItem("men", male_result);
-                 localStorage.setItem("female", female_result);
+                console.log(actualCountries);
+                 localStorage.setItem("countries", actualCountries);
+                 localStorage.setItem("men", menStat);
+                 localStorage.setItem("female", femaleStat);
+                 self.showMap = true;
+                 self.prop++;
                 
             });
         }
-        if(self.showMap === true){
-            this.prop++;
-        }
-        
        
         
-        self.showMap = true;
+       
+        console.log("showmap");
+        
     };
     
     this.changeCountry = function(country){

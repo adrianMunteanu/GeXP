@@ -13,11 +13,15 @@
             }
         
             this.getStatisticLink = function(statistcName, year, country){
-                return "/statistics?statistic="+statistcName+"&year="+year+"&country="+country;
+                return "/statistic?statistic_name="+statistcName+"&year="+year+"&country="+country;
             }
         
-            this.getStatisticWithOnlyYearLink = function(statisticname, year){
-                return "/statistics?statistic="+statistcName+"&year="+year;
+            this.getStatisticWithOnlyYearLink = function(statistcName, year){
+                return "/statistic?statistic_name="+statistcName+"&year="+year;
+            }
+            
+            this.addUser = function(user){
+            	return "/user";
             }
         });
 }());
