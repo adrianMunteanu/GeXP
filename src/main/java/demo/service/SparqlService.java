@@ -4,6 +4,7 @@ import java.util.List;
 
 import demo.frontModel.DropDown;
 import demo.frontModel.GenderResult;
+import queries.Statistic;
 import queries.StatisticResult;
 import queries.WikidataParameter;
 
@@ -26,5 +27,7 @@ public interface SparqlService {
 	public List<WikidataParameter> getWikidataProfessions();
 
 	public GenderResult getWikidataStatistic(String statisic, String country, String eyeColor, String proffesion);
+	
+	public Statistic getStatisticDescription(String statistic);
 
 }

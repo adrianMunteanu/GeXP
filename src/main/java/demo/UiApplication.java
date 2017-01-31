@@ -40,18 +40,10 @@ public class UiApplication {
 		SpringApplication.run(UiApplication.class, args);
 	}
 
-	@Configuration
-	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			// @formatter:off
-			http.httpBasic().and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/")
-					.permitAll().anyRequest().authenticated().and().csrf()
-					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-			// @formatter:on
-		}
-
-	}
+//	@Configuration
+//	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+//	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+//
+//	}
 
 }

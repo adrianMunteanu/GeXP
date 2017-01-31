@@ -47,9 +47,6 @@ public class MainController {
 
 	@RequestMapping("/countries")
 	public List<String> getCountries() {
-		
-		
-
 		return sparqlService.getCountries();
 	}
 }
