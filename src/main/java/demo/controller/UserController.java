@@ -1,6 +1,9 @@
 package demo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,18 +19,14 @@ public class UserController {
 	UserRepository userRepository;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void addPerson(User user){
+	public void addPerson(@RequestBody User user){
 		userRepository.save(user);
+		//session.setAttribute("user", user);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public String test(){
-		User user = new User();
-		user.setPassword("asdasd");
-		user.setUsername("Iasmina");
-		user.setEnabled(1);
-		userRepository.save(user);
-		return "saved";
-	}
+//	@RequestMapping(method = RequestMethod.GET)
+//	public void test(@RequestBody User user){
+//		userRepository.save(user);
+//	}
 	
 }

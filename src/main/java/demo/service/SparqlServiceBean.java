@@ -1,9 +1,13 @@
 package demo.service;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;import java.util.UUID;
 import java.util.List;
 
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.springframework.stereotype.Service;
+
 
 import demo.frontModel.DropDown;
 import demo.frontModel.GenderResult;
@@ -17,11 +21,12 @@ import queries.WikidataParameter;
 @Service
 public class SparqlServiceBean implements SparqlService {
 
+	public static final String OwlFilePath  = "C:\\Adrian\\statisticsOntologyeeeee.owl";
 	StatisticOntology owl = new StatisticOntology();
 	QueriesApi query = new QueriesApi();
 	boolean init;
 	{
-		String OwlFilePath = "C:\\Adrian\\statisticsOntologyeeeee.owl";
+		//String OwlFilePath = "C:\\Adrian\\statisticsOntologyeeeee.owl";
 		boolean created = owl.create();
 		if (created) {
 			owl.initialize();
@@ -152,9 +157,26 @@ public class SparqlServiceBean implements SparqlService {
 		}
 		return categoryDetails;
 		
-//		StatisticOntology.addData(filePath, yearData, countryData, maleData, femaleData, stat_identifier, stat_type);
 	}
 	
+	public void insertData(int yearData, String countryData, String maleData, String femaleData, String stat_type){
+		try {
+			StatisticOntology.addData(OwlFilePath, yearData, countryData, maleData, femaleData, UUID.randomUUID().toString(), stat_type);
+		} catch (OWLOntologyCreationException | FileNotFoundException | OWLOntologyStorageException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void deleteData(int yearData, String countryData, String stat_type){
+		 try {
+			StatisticOntology.deleteData(OwlFilePath, yearData, countryData, stat_type);
+		} catch (OWLOntologyCreationException | FileNotFoundException | OWLOntologyStorageException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 	
 
 }

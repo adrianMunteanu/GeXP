@@ -13,22 +13,41 @@ app.controller('register', ['$scope', '$http', '$window', '$rootScope', function
 			this.showError = true;
 			this.errorMessage = "Passwords don't match!";
 		}
-		else if(validateEmail(this.email) === false){
-			this.showError = true;
-			this.errorMessage = "Please provide a valid e-mail adres!";
-		}
+//		else if(validateEmail(this.email) === false){
+//			this.showError = true;
+//			this.errorMessage = "Please provide a valid e-mail adres!";
+//		}
 		else{
 			this.showError = false;
 			console.log("Login successful: " + this.username + " " + this.password)
 		}
+		var dataObj = {
+				username : this.username,
+				password : this.password
+		};
+		console.log(dataObj)
+//		 $http.post('/users').success(function (dataObj) {
+//			 $window.location.href = '/home.html';
+//		    }).error(function (data) {
+//		    	this.showError = true;	
+//		    	this.errorMessage = "Something went wrong.";
+//		    });
+		console.log({"username":this.username, "password":this.password , "enabled":1});
+		$http({
+            method : 'POST',
+            url    : "/users",
+            data   : {"username":this.username, "password":this.password , "enabled":1},
+            headers :{'Content-Type':'application/json'}
+    })
+    .success(function(data){
+    	 $window.location.href = '/home.html';
+     })
+     .error(function(data){
+            alert("error");
+        });
+
+		
 	}
-	
-	 $http.post('/register').success(function (data) {
-		 $window.location.href = '/home.html';
-	    }).error(function (data) {
-	    	this.showError = true;	
-	    	this.errorMessage = "Something went wrong.";
-	    });
 	
 	
 	function validateEmail(email) {

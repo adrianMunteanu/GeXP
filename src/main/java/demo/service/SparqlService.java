@@ -25,7 +25,12 @@ public interface SparqlService {
 	public List<WikidataParameter> getWikidataProfessions();
 
 	public GenderResult getWikidataStatistic(String statisic, String country, String eyeColor, String proffesion);
-	
+
 	public Statistic getStatisticDescription(String statistic);
+
+	public void insertData(int yearData, String countryData, String maleData, String femaleData, String stat_type);
+
+	public void deleteData(int yearData, String countryData, String stat_type);
+
 
 }

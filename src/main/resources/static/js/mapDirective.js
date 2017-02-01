@@ -100,7 +100,11 @@ app.directive('myMap', function() {
         console.log("markers set");
         
         scope.$watch("typeId",function(newValue,oldValue) {console.log("plm");
+       
         	 google.maps.event.trigger(map, 'resize');
+//        	 initMap();
+        	 
+        	 setMapOnAll(null);
         	 var countries = localStorage.getItem('countries');
              console.log(countries);
              var menStat = localStorage.getItem('men');

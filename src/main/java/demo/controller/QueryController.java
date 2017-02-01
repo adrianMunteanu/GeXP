@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class QueryController {
 		return sparqlService.getDropDownValues(statistic);
 	}
 
-	@RequestMapping("/statistic")
+	@RequestMapping(value = "/statistic" , method = RequestMethod.GET)
 	public List<StatisticResult> getStatistic(@RequestParam(value = "statistic_name") String statistic,
 			@RequestParam(value = "year") Integer year,
 			@RequestParam(value = "country", required = false) String country) {
@@ -63,11 +64,25 @@ public class QueryController {
 			@RequestParam(value = "profession", required = false) String profession) {
 		return sparqlService.getWikidataStatistic(statistic, country, eyeColor, profession);
 	}
-	
+
 	@RequestMapping("/statistics/description")
-	public Statistic getDescription(@RequestParam(value = "statistic")String statistic) {
+	public Statistic getDescription(@RequestParam(value = "statistic") String statistic) {
 		return sparqlService.getStatisticDescription(statistic);
 	}
+ 
 	
+	@RequestMapping(value = "/statistic", method = RequestMethod.POST)
+	public void addStatistic(@RequestParam(value = "year") Integer year,
+			@RequestParam(value = "country") String country, @RequestParam(value = "maleData") String maleData,
+			@RequestParam(value = "femaleData") String femaleData,
+			@RequestParam(value = "statistic") String statistic) {
+		sparqlService.insertData(year, country, maleData, femaleData, statistic);
+	}
+
+	@RequestMapping(value = "/statistic", method = RequestMethod.DELETE)
+	public void deleteStatistic(@RequestParam(value = "year") Integer year,
+			@RequestParam(value = "country") String country, @RequestParam(value = "statistic") String statistic) {
+		sparqlService.deleteData(year, country, statistic);
+	}
 
 }
