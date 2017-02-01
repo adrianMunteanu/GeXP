@@ -1,14 +1,16 @@
 package demo.service;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;import java.util.UUID;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.UUID;
 import java.util.List;
 
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.springframework.stereotype.Service;
 
-
+import demo.comparator.StratisticComparator;
 import demo.frontModel.DropDown;
 import demo.frontModel.GenderResult;
 import ontology.StatisticOntology;
@@ -134,6 +136,14 @@ public class SparqlServiceBean implements SparqlService {
 		default:
 			break;
 		}
+		List<SingleGenderStatisticResult> femaleResults = genderResult.getFemaleResults();
+		List<SingleGenderStatisticResult> maleResults = genderResult.getMaleResults();
+		
+		maleResults.retainAll(femaleResults);
+		femaleResults.retainAll(maleResults);
+		
+		Collections.sort(maleResults, new StratisticComparator());
+		Collections.sort(femaleResults, new StratisticComparator());
 
 		return genderResult;
 	}

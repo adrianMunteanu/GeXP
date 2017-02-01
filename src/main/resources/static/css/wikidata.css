@@ -1,0 +1,69 @@
+.container{
+	height:100vh;
+}
+
+.upperDiv{
+	height: 20%;
+	border-bottom:2px solid black;
+	position:relative;
+}
+
+.bottomDiv{
+	height:80%;
+	width:100%;
+	display:flex;
+}
+.logo{
+	float:left;
+  	top:50%; 
+  	height:10em; 
+  	margin-top: 5em;
+}
+
+.username{
+	float:right;
+  	top:50%; 
+  	height:10em; 
+  	margin-top: 5em;
+}
+
+.leftDiv{
+	border-radius:1rem;
+	flex: 0 0 30%;
+		background-color: #e8eaed;
+}
+
+.rightDiv{
+	flex: 0 0 70%;
+}
+
+.customDropdown{
+	text-align:center;
+	margin-bottom:30%;
+	margin-top:15%;
+}
+
+.dropdownButton{
+	width:65%;
+	
+}
+
+
+#gmaps {
+	width: 100%;
+	height: 94%;
+	margin-left: 3rem;
+}
+
+.scrollable-menu {
+	height: auto;
+	max-height: 200px;
+	overflow-x: hidden;
+	max-width: 200px;
+}
+
+#container{
+	width: 70%;
+	height: 70%;
+	margin-left: 3rem; 
+}

@@ -37,6 +37,30 @@
             var url = Configuration.getStatisticWithOnlyYearLink(statisticName, year);
             registerGetRequest(url, cb);
         }
+        this.getWikidataCategories = function(cb){
+            var url = Configuration.getWikidataCategoriesLink();
+            registerGetRequest(url, cb);
+        }
+        
+        this.getWikidataCountries = function(cb){
+            var url = Configuration.getWikidataCountriesLink();
+            registerGetRequest(url, cb);
+        }
+        
+        this.getWikidataEyeColors = function(cb){
+            var url = Configuration.getWikidataEyeColorsLink();
+            registerGetRequest(url, cb);
+        }
+        
+        this.getWikidataProfessions = function(cb){
+            var url = Configuration.getWikiDataProfessionsLink();
+            registerGetRequest(url, cb);
+        }
+        
+        this.getWikidataStatistic = function(statisticName, eyeColor, profession, cb){
+            var url = Configuration.getWikiDataStatisticLink(statisticName, eyeColor, profession);
+            registerGetRequest(url, cb);
+        }
         
     }]);
 }());

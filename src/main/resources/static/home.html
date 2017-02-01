@@ -43,15 +43,57 @@
     } </script> -->
 <!-- </script><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0bsq7Dbedo6M_v4OifXWeBIs_kKrRbyE&callback=initMap"></script> -->
 <script src="js/maps.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.0.0/highcharts-ng.js"></script>
+
 </head>
 
 <body ng-app="hello">
+
+
+
 	<div class="container" ng-controller="home as vm">
-		<div class="upperDiv">
-			<span class="logo"> Gexp </span> <span class="username"><i
-				class="fa fa-user-circle" aria-hidden="true"></i>Username</span>
-		</div>
-		<div class="bottomDiv">
+
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">GeXP</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Page 1</a></li>
+					<li><a href="#">Page 2</a></li>
+				</ul>
+<!-- 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+							Sign Up</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
+							Login</a></li>
+				</ul> -->
+
+
+				<div class="pull-right">
+					<ul class="nav pull-right">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">Welcome, {{vm.authenticatedUser}} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+				<!-- 				<li><a href="/user/preferences"><i class="icon-cog"></i>
+										Preferences</a></li>
+								<li><a href="/help/support"><i class="icon-envelope"></i>
+										Contact Support</a></li> -->
+						<!-- 		<li class="divider"></li> -->
+								<li><a href="" ng-click="vm.logout()" ><i class="icon-off"></i>
+										Logout</a></li>
+							</ul></li>
+					</ul>
+				</div>
+		</nav>
+
+
+
+<div class="bottomDiv">
 			<div class="leftDiv">
 				<div class="dropdown customDropdown">
 					<button class="btn btn-default dropdown-toggle dropdownButton"
@@ -67,7 +109,7 @@
 					</ul>
 				</div>
 				<div class="dropdown customDropdown"
-					ng-if="vm.showDropdowns === true">
+					ng-if="vm.showDropdowns === true && vm.selectedStatistic.identifier !== 'Select Statistic'">
 					<button class="btn btn-default dropdown-toggle dropdownButton"
 						type="button" id="dropdownMenu1" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="true">
@@ -81,7 +123,7 @@
 					</ul>
 				</div>
 				<div class="dropdown customDropdown"
-					ng-show="vm.showDropdowns === true">
+					ng-show="vm.showDropdowns === true && vm.selectedStatistic.identifier !== 'Select Statistic'">
 					<button class="btn btn-default dropdown-toggle dropdownButton"
 						type="button" id="dropdownMenu1" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="true">
@@ -94,17 +136,27 @@
 							ng-click="vm.changeYear(a)">{{a}}</a></li>
 					</ul>
 				</div>
-				<div class="customDropdown" ng-show="vm.showDropdowns === true">
+				<div class="customDropdown" ng-show="vm.showDropdowns === true && vm.selectedStatistic.identifier !== 'Select Statistic'">
 					<button class="btn btn-default dropdownButton" type="button"
-						aria-expanded="true" ng-click="vm.selectStatistic()">
+						aria-expanded="true" ng-disabled="vm.selectedYear ==='Select Year'" ng-click="vm.selectStatistic()">
 						Show Statistic <i class="fa fa-play" aria-hidden="true"></i>
 					</button>
 				</div>
 			</div>
 			<div class="rightDiv" ng-if="vm.showMap == true">
+				<div>{{vm.selectedStatistic.long_description}} {{vm.selectedYear}}</div>
 				<div my-map="" type-id={{vm.prop}}></div>
+			</div>
+			<div class="rightDiv" ng-show="vm.showChart === true">
+				<div class="row">
+				    <div id="container"></div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+
+	
+	</script>
 </body>
 </html>

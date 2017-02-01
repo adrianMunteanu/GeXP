@@ -1,8 +1,8 @@
 angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProvider) {
 
 	$routeProvider.when('/', {
-		templateUrl : 'home.html',
-		controller : 'home',
+		templateUrl : 'home2.html',
+		controller : 'navigation',
 		controllerAs: 'controller'
 	}).when('/login', {
 		templateUrl : 'login.html',
@@ -13,8 +13,8 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 }).controller('navigation',
-
-		function($rootScope, $http, $location, $route) {
+	
+		function($rootScope, $http, $location, $route, $window) {
 			
 			var self = this;
 
@@ -46,20 +46,22 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 
 			}
 
-			authenticate();
+//			authenticate();
 
 			self.credentials = {};
 			self.login = function() {
 				authenticate(self.credentials, function(authenticated) {
 					if (authenticated) {
 						console.log("Login succeeded")
-						$location.path("/");
+					//	$location.path("/home.html");
+						$window.location.href = '/home.html';
 						self.error = false;
 						$rootScope.authenticated = true;
 					} else {
 						console.log("Login failed")
-						$location.path("/login");
+//						$location.path("/login");
 						self.error = true;
+						self.errorMessage = "Login failed";
 						$rootScope.authenticated = false;
 					}
 				})

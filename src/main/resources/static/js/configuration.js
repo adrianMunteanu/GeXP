@@ -23,5 +23,25 @@
             this.addUser = function(user){
             	return "/user";
             }
+            
+            this.getWikidataCategoriesLink = function(){
+                return "/wikiDataStatistics";
+            }
+            
+            this.getWikidataCountriesLink = function(){
+                return "/wikiDataCountries";
+            }
+            
+            this.getWikidataEyeColorsLink = function(){
+                return "/wikiDataEyeColors";
+            }
+            
+            this.getWikiDataProfessionsLink = function(){
+                return "/wikiDataProfessions";
+            }
+            
+            this.getWikiDataStatisticLink = function(statisticName, country, eyeColor, profession){
+                return "/wikiDataStatistic?statistic="+statisticName+"&eyeColor="+eyeColor+"&profession="+profession;
+            }
         });
 }());

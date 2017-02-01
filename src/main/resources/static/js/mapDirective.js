@@ -104,7 +104,7 @@ app.directive('myMap', function() {
         	 google.maps.event.trigger(map, 'resize');
 //        	 initMap();
         	 
-        	 setMapOnAll(null);
+        	 //setMapOnAll(null);
         	 var countries = localStorage.getItem('countries');
              console.log(countries);
              var menStat = localStorage.getItem('men');
